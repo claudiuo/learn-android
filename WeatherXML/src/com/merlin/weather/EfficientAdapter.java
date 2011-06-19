@@ -1,12 +1,7 @@
 package com.merlin.weather;
 
-import java.net.URI;
-import java.net.URL;
-
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.merlin.weather.util.BmpFromURL;
-import com.merlin13.weather.R;
 
 public class EfficientAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Forecast[] data;
 
     public EfficientAdapter(Context context) {
-        // Cache the LayoutInflate to avoid asking for a new one each time.
+        // Cache the LayoutInflater to avoid asking for a new one each time.
         mInflater = LayoutInflater.from(context);
 
         // Icons bound to the rows.
@@ -42,7 +36,7 @@ public class EfficientAdapter extends BaseAdapter {
 
     /**
      * Since the data comes from an array, just returning the index is
-     * sufficent to get at the data. If we were using a more complex data
+     * sufficient to get at the data. If we were using a more complex data
      * structure, we would return whatever object represents one row in the
      * list.
      *
@@ -68,7 +62,7 @@ public class EfficientAdapter extends BaseAdapter {
      *      android.view.ViewGroup)
      */
     public View getView(int position, View convertView, ViewGroup parent) {
-        // A ViewHolder keeps references to children views to avoid unneccessary calls
+        // A ViewHolder keeps references to children views to avoid unnecessary calls
         // to findViewById() on each row.
         ViewHolder holder;
 
