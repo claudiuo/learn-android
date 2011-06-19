@@ -1,4 +1,4 @@
-package com.merlin13.weather;
+package com.merlin.weather;
 
 import java.sql.Timestamp;
 import java.text.ParseException;

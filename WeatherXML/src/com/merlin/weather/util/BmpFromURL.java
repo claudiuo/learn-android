@@ -1,4 +1,4 @@
-package com.merlin13.weather.util;
+package com.merlin.weather.util;
 
 import java.io.IOException;
 import java.io.InputStream;

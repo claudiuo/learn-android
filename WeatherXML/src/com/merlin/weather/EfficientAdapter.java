@@ -1,4 +1,4 @@
-package com.merlin13.weather;
+package com.merlin.weather;
 
 import java.net.URI;
 import java.net.URL;
@@ -14,7 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.merlin13.weather.util.BmpFromURL;
+import com.merlin.weather.util.BmpFromURL;
+import com.merlin13.weather.R;
 
 public class EfficientAdapter extends BaseAdapter {
     private LayoutInflater mInflater;

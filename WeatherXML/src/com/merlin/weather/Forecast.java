@@ -1,4 +1,4 @@
-package com.merlin13.weather;
+package com.merlin.weather;
 
 import java.net.MalformedURLException;
 import java.net.URL;
