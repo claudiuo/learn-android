@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Forecast implements Comparable<Forecast>{
+public class Forecast extends BaseWeatherCondition implements Comparable<Forecast> {
 	static SimpleDateFormat FORMATTER =
 		new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
 	private String title;
@@ -14,13 +14,9 @@ public class Forecast implements Comparable<Forecast>{
 	private String description;
 	private Date date;
 
-	private static final String GOOGLE_URL = "http://www.google.com";
-
 	private String dayOfWeek;
 	private int low;
 	private int high;
-	private URL iconUrl;
-	private String condition;
 
 	public String getDayOfWeek() {
 		return dayOfWeek;
@@ -52,26 +48,6 @@ public class Forecast implements Comparable<Forecast>{
 
 	public void setHigh(String high) {
 		this.high = Integer.parseInt(high);
-	}
-
-	public URL getIconUrl() {
-		return iconUrl;
-	}
-
-	public void setIconUrl(String iconUrl) {
-		try {
-			this.iconUrl = new URL(GOOGLE_URL+iconUrl);
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public String getCondition() {
-		return condition;
-	}
-
-	public void setCondition(String condition) {
-		this.condition = condition;
 	}
 
 	public Forecast copy(){

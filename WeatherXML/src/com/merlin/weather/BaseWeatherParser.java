@@ -10,12 +10,17 @@ public abstract class BaseWeatherParser implements WeatherParser {
 
 	// names of the XML tags
 	static final String FORECAST_CONDITIONS = "forecast_conditions";
+	static final String CURRENT_CONDITIONS = "current_conditions";
 	static final String WEATHER = "weather";
-	static final  String CONDITION = "condition";
+	static final String CONDITION = "condition";
 	static final String DAY_OF_WEEK = "day_of_week";
 	static final String LOW = "low";
 	static final String HIGH = "high";
 	static final String ICON = "icon";
+	static final String TEMP_F = "temp_f";
+	static final String TEMP_C = "temp_c";
+	static final String HUMIDITY = "humidity";
+	static final String WIND_CONDITION = "wind_condition";
 	// names of the XML attribute for all tags
 	static final String DATA = "data";
 
@@ -82,9 +87,9 @@ public abstract class BaseWeatherParser implements WeatherParser {
 
 	protected InputStream getInputStream() {
 		try {
-//			return feedUrl.openConnection().getInputStream();
-			InputStream is = new ByteArrayInputStream(testXML.getBytes("UTF-8"));
-			return is;
+			return feedUrl.openConnection().getInputStream();
+//			InputStream is = new ByteArrayInputStream(testXML.getBytes("UTF-8"));
+//			return is;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

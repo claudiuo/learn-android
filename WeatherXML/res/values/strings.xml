@@ -2,4 +2,6 @@
 <resources>
     <string name="hello">Hello World, WeatherXML!</string>
     <string name="app_name">Weather from Google</string>
+    <string name="current">Current Conditions</string>
+    <string name="forecast">Forecast</string>
 </resources>

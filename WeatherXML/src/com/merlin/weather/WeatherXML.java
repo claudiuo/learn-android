@@ -3,13 +3,21 @@ package com.merlin.weather;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.merlin.weather.EfficientAdapter.ViewHolder;
+import com.merlin.weather.util.BmpFromURL;
+
 import android.app.ListActivity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class WeatherXML extends ListActivity {
 
 	private List<Forecast> forecasts;
+	private Current currentConditions;
 	static String feedUrl = "http://www.google.com/ig/api?weather=84043&hl=en";
 	private static final String TAG = "WeatherXML";
 
@@ -22,7 +30,23 @@ public class WeatherXML extends ListActivity {
         loadFeed();
         adapter.setData(forecasts.toArray(new Forecast[0]));
         setListAdapter(adapter);
+
+        setTopView();
     }
+
+	private void setTopView() {
+		LinearLayout topLayoutView = (LinearLayout) findViewById(R.id.topLayout);
+
+		ViewHolder holder = new ViewHolder();
+        holder.text = (TextView) topLayoutView.findViewById(R.id.text);
+        holder.icon = (ImageView) topLayoutView.findViewById(R.id.icon);
+
+        BmpFromURL myBmpFromURL = new BmpFromURL(currentConditions.getIconUrl().toString());
+        Bitmap myBitmap = myBmpFromURL.getMyBitmap();
+
+        holder.icon.setImageBitmap(myBitmap);
+        holder.text.setText(currentConditions.toString());
+	}
 
 	private void loadFeed(){
 		List<String> forecastDays = new ArrayList<String>();
@@ -30,7 +54,9 @@ public class WeatherXML extends ListActivity {
     		Log.i(TAG, "loading weather XML");
     		WeatherParser parser = new AndroidSaxWeatherXMLParser(feedUrl);
 	    	long start = System.currentTimeMillis();
-	    	forecasts = parser.parse();
+	    	WeatherInfo weatherInfo = parser.parse();
+	    	forecasts = weatherInfo.getForecasts();
+	    	currentConditions = weatherInfo.getCurrentConditions();
 	    	long duration = System.currentTimeMillis() - start;
 	    	Log.i(TAG, "Parser duration=" + duration);
 	    	for (Forecast f : forecasts){
@@ -41,34 +67,4 @@ public class WeatherXML extends ListActivity {
     		Log.e(TAG,t.getMessage(),t);
     	}
     }
-
-//	private String writeXml(){
-//		XmlSerializer serializer = Xml.newSerializer();
-//		StringWriter writer = new StringWriter();
-//		try {
-//			serializer.setOutput(writer);
-//			serializer.startDocument("UTF-8", true);
-//			serializer.startTag("", "messages");
-//			serializer.attribute("", "number", String.valueOf(forecasts.size()));
-//			for (Forecast msg: forecasts){
-//				serializer.startTag("", "message");
-//				serializer.attribute("", "date", msg.getDate());
-//				serializer.startTag("", "title");
-//				serializer.text(msg.getTitle());
-//				serializer.endTag("", "title");
-//				serializer.startTag("", "url");
-//				serializer.text(msg.getLink().toExternalForm());
-//				serializer.endTag("", "url");
-//				serializer.startTag("", "body");
-//				serializer.text(msg.getDescription());
-//				serializer.endTag("", "body");
-//				serializer.endTag("", "message");
-//			}
-//			serializer.endTag("", "messages");
-//			serializer.endDocument();
-//			return writer.toString();
-//		} catch (Exception e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
 }
